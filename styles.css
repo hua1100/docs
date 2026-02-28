@@ -1,0 +1,221 @@
+/* ============================================================
+   Warm Technology Editorial Style
+   Based on: Lovart Design Flow — "Warm Technology" aesthetic
+   Palette: Sage Green · Terracotta · Warm Cream · Warm Charcoal
+   ============================================================ */
+
+/* --- Google Fonts: Editorial Serif + Clean Sans-serif --- */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;450;500;600&display=swap');
+
+/* --- CSS Variables --- */
+:root {
+  --color-sage:       #6B8F71;
+  --color-sage-light: #9EC4A1;
+  --color-terracotta: #C4703A;
+  --color-gold:       #C9A84C;
+  --color-cream:      #F4F4F0;
+  --color-charcoal:   #3A3A35;
+  --color-charcoal-2: #5A5A52;
+}
+
+/* ============================================================
+   TYPOGRAPHY — Editorial Serif Headings
+   ============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lora', Georgia, 'Times New Roman', serif !important;
+  letter-spacing: -0.02em;
+  color: var(--color-charcoal);
+}
+
+h1 { font-weight: 600; }
+h2 { font-weight: 500; }
+h3 { font-weight: 500; }
+
+/* Body text */
+body,
+p, li, td, th,
+.prose {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  color: var(--color-charcoal);
+}
+
+/* Sidebar navigation text */
+nav, [data-sidebar] {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ============================================================
+   BACKGROUND — Warm Cream Paper
+   ============================================================ */
+
+/* Light mode: warm cream */
+html[class*="light"],
+.light,
+body {
+  background-color: var(--color-cream) !important;
+}
+
+/* Sidebar background — slightly warmer */
+[data-sidebar],
+aside {
+  background-color: #EEEDE8 !important;
+}
+
+/* ============================================================
+   CALLOUTS — Terracotta & Sage accents
+   ============================================================ */
+
+/* Tip — Sage green */
+.callout-tip,
+[data-callout="tip"] {
+  border-left-color: var(--color-sage) !important;
+  background-color: #EBF2EC !important;
+}
+
+/* Note — Soft gold */
+.callout-note,
+[data-callout="note"] {
+  border-left-color: var(--color-gold) !important;
+  background-color: #F7F2E6 !important;
+}
+
+/* Warning — Terracotta */
+.callout-warning,
+[data-callout="warning"] {
+  border-left-color: var(--color-terracotta) !important;
+  background-color: #FAF0EA !important;
+}
+
+/* Check / Success — Sage */
+.callout-check,
+[data-callout="check"] {
+  border-left-color: var(--color-sage-light) !important;
+  background-color: #EBF2EC !important;
+}
+
+/* Info — Warm charcoal */
+.callout-info,
+[data-callout="info"] {
+  border-left-color: var(--color-charcoal-2) !important;
+  background-color: #F0EFEB !important;
+}
+
+/* Danger — Deep terracotta */
+.callout-danger,
+[data-callout="danger"] {
+  border-left-color: #9E3A1A !important;
+  background-color: #FAE8E4 !important;
+}
+
+/* ============================================================
+   CODE BLOCKS — Warm paper tone
+   ============================================================ */
+
+pre, code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Menlo', monospace !important;
+  background-color: #ECEAE4 !important;
+  border: 1px solid #DDD9D0 !important;
+  border-radius: 6px !important;
+}
+
+/* Inline code */
+p code, li code {
+  background-color: #ECEAE4 !important;
+  color: var(--color-terracotta) !important;
+  padding: 1px 5px !important;
+  border-radius: 3px !important;
+}
+
+/* ============================================================
+   LINKS — Terracotta accent
+   ============================================================ */
+
+a {
+  color: var(--color-terracotta) !important;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.15s ease;
+}
+
+a:hover {
+  text-decoration-color: var(--color-terracotta) !important;
+}
+
+/* ============================================================
+   CARDS — Warm paper with sage border
+   ============================================================ */
+
+.card,
+[data-card] {
+  background-color: #FAFAF6 !important;
+  border: 1px solid #D8D5CC !important;
+  border-radius: 10px !important;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover,
+[data-card]:hover {
+  border-color: var(--color-sage) !important;
+  box-shadow: 0 4px 16px rgba(107, 143, 113, 0.12) !important;
+}
+
+/* ============================================================
+   STEPS — Sage numbered circles
+   ============================================================ */
+
+[data-step] .step-number,
+.step-number {
+  background-color: var(--color-sage) !important;
+  color: #fff !important;
+  font-family: 'Lora', serif !important;
+  font-weight: 600;
+}
+
+/* ============================================================
+   TABLE — Editorial clean style
+   ============================================================ */
+
+table {
+  border-collapse: collapse !important;
+  width: 100%;
+}
+
+th {
+  background-color: #ECEAE4 !important;
+  font-family: 'Lora', serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em;
+  border-bottom: 2px solid var(--color-sage) !important;
+}
+
+td {
+  border-bottom: 1px solid #DDD9D0 !important;
+}
+
+tr:hover td {
+  background-color: #F7F6F1 !important;
+}
+
+/* ============================================================
+   NAVBAR — Minimal warm tone
+   ============================================================ */
+
+header,
+[data-navbar] {
+  background-color: rgba(244, 244, 240, 0.92) !important;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #DDD9D0 !important;
+}
+
+/* ============================================================
+   BLOCKQUOTE — Terracotta left border
+   ============================================================ */
+
+blockquote {
+  border-left: 3px solid var(--color-terracotta) !important;
+  background-color: #FAF0EA !important;
+  padding: 12px 16px !important;
+  border-radius: 0 6px 6px 0 !important;
+  font-style: italic;
+  color: var(--color-charcoal-2) !important;
+}
