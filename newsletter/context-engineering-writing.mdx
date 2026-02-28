@@ -1,0 +1,58 @@
+---
+title: "Context Engineering + Test-Time Diffusion：打造 AI 寫作的完美公式"
+description: "用 System Prompt、Context Engineering 與 Test-Time Diffusion 三大策略，突破 AI 長文寫作的兩個極端，打造真正符合需求的百分作品。"
+keywords: ["Context Engineering", "System Prompt", "Test-Time Diffusion", "AI寫作", "Claude Code", "Prompt工程"]
+---
+
+一直想要用 AI 生成 100% 符合需求的長篇文章，不只是大綱或草稿，過去的嘗試落在兩個極端：
+
+**簡單粗暴：User prompt** — 即使寫得再詳細，模型受系統提示詞限制，風格跟語氣無法達到標準，而且成果起伏大，因為一但文章變長、資料量變大，一開始下的 User prompt 會超出模型的負荷。
+
+**深挖技術：Fine tune** — 實際嘗試發現資料量、金錢與時間的需求超乎想像，微調後的模型泛化能力差，完全無法處理原始逐字稿，對於寫作這類需要自由發想的任務，不太合適。
+
+第三條路，是 System Prompt（系統提示詞）。
+
+## 為什麼 System Prompt 這麼重要？
+
+System Prompt 決定 AI 模型的「角色、行為規則、回應風格」，以及執行任務的方式。User prompt 的層級低於 System Prompt，無法覆蓋或體現出不同於 System Prompt 的個性，這也是 Claude 網頁版、ChatGPT 網頁版這些只能使用預設系統提示詞的環境，AI 容易產出「制式」、「冷漠」、「與實際情境脫離」的回覆。
+
+哪些工具可以自訂 System Prompt？AI CLI 如 Gemini CLI、Claude Code、Cursor CLI 都可以，做法大部分都是在根目錄建立一個特定名稱的 md 檔案，模型就會瞬間徹底變臉成你設定的樣子。
+
+## System Prompt 撰寫策略
+
+### 策略一：讓 AI 寫工作筆記（Context Engineering）
+
+具體做法：
+
+1. 設計工作筆記（如 `progress.md`），讓 AI 在執行流程中不斷進行更新
+2. 筆記應包含：任務進度（完成的打勾）、更詳細的進度（對於多步驟操作）、以及當前任務
+3. 透過提示詞要求 AI 每完成一步都更新該文件
+
+這套流程讓更新的內容穿插在每一次工具調用之間，最大化利用大語言模型對上下文**開頭**（提示詞，告知要做什麼）和**末尾**（筆記，告知做到哪裡了）資訊特別敏感的特性，避免 AI 在處理複雜任務時思路跑偏。
+
+### 策略二：多版本迭代 + Human in the Loop（Test-Time Diffusion）
+
+此策略用到 Google Deep Research 的技巧：Test-Time Diffusion。Diffusion 原意是把一個雜訊初稿逐步去噪、精修成高品質成品的過程。
+
+兩個關鍵步驟：
+
+- **反覆搜索**：多輪查找相關高品質資料並生成答案摘要，每找到一次高品質資料就加入初稿
+- **自我演化**：每次回答會產生多個不同版本，再依據回饋不斷修正答案
+
+我採用的是自我演化的概念，在 System Prompt 中要求模型每段都一次生成 3 種版本，但發現要 LLM 評分難度太高，因此加入 **human in the loop**，改由人工回饋選出符合需求的答案；若有兩個回答都不錯，也可以指定融合哪些段落；甚至當都不合期待時，也可以直接給予改善建議。
+
+## 有趣小工具
+
+### lovart：中文也能通的超強設計團隊
+
+多模型 Agent，匯集十幾種主流模型，從研究到生圖一手包辦的設計團隊，從想法自動產生一整組設計物。
+
+- 沒有靈感？只要有一個粗淺的想法，lovart 會自己上網找 reference，產生多個選項問你比較喜歡哪些
+- 中文字出錯率低
+- 圖片生成在畫布上，就像 Figma，可用「註解」的方式修改特定區域
+
+技術原理：多模態思維鏈（MCoT），模型不只能用文字思考，還能用圖片、聲音、影片來推理。
+
+### Claude Code 新功能
+
+近期推出的 Code execution and file creation 工具，不只能拿來做 PPT 跟 Excel，竟然有 Shell 環境、git，可以直接 git clone GitHub 專案，在 Claude 網頁版看到終端機的感覺很酷。
