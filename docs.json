@@ -11,6 +11,19 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "電子報",
+        "groups": [
+          {
+            "group": "文章列表",
+            "pages": [
+              "newsletter/ai-incentive-bonus",
+              "newsletter/ai-annual-review",
+              "newsletter/fuckup-days-amway-couch"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Guides",
         "groups": [
           {
