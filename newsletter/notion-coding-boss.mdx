@@ -1,0 +1,102 @@
+---
+title: "老闆以為我會 coding，殊不知我只是用了 Notion"
+description: "用 Claude Agent SDK 打造 Notion AI 自動化任務系統，從狀態機到自主 Agent 的重構之路"
+keywords: ["Notion", "Claude Agent SDK", "AI Agent", "自動化", "Antigravity", "State Machine"]
+---
+
+## 老闆以為我會 coding，殊不知我只是用了 Notion
+
+在 Notion 建立一個 To-Do 任務，AI PM、工程師、QA 就默默把工作做完了，需要人類確認的地方還會自動把卡片變紅通知你。
+
+這是 Notion 工程師 Geoffrey Litt 在 Every vibe coding 馬拉松中分享的專案，習慣用 Notion 進行知識、專案管理的讀者是不是超興奮？我真的把它做出來了！
+
+---
+
+## 製作流程
+
+**使用工具：** Claude、Claude Agent SDK、Antigravity、Notion
+
+<Steps>
+  <Step title="整理想法與規格書">
+    將原始想法、希望達成的目標講給 Claude 聽，請他研究相關技術與限制，並整理成規格書。
+  </Step>
+  <Step title="實作">
+    請 Antigravity 依據規格書實作。
+  </Step>
+  <Step title="建立 Notion Integration">
+    依據 Antigravity 的教學建立 Notion Integration，取得 Notion API Key，並打開資料表的權限。（這可能是最難的一步了，如果搞不定，別忘了還有 AI 瀏覽器可以用！）
+  </Step>
+  <Step title="測試與修改">
+    測試、截圖、請 Antigravity 修改，直到達成預期效果。
+  </Step>
+</Steps>
+
+---
+
+## 最大重構：從自幹狀態機到用 Claude Agent SDK
+
+### 原本的問題
+
+我們先前的系統像是一個工廠流水線，寫死了 300 多行的狀態邏輯：
+
+```
+如果狀態是 A → 呼叫 AI 寫 Spec → 更新狀態 B
+如果狀態是 B → 呼叫 AI 寫 Code → 更新狀態 C
+```
+
+這看起來很美好，但由於 AI 生成的不確定性，這套流程實際上非常脆弱。一旦 AI 生成的程式碼有語法錯誤，或是需要查資料、跑測試，這套「寫死」的邏輯就會卡住，反而必須寫一堆 `if (error) retry` 的補救邏輯，程式碼變得愈來愈難維護。
+
+<Note>
+只把 AI 當作 API 呼叫會限制它的能力，而應該把它當作一個「Agent」。代理人應該有自己的思考迴圈（Loop），遇到問題自己查、自己修，而不是等人類不停地去改。
+</Note>
+
+### 引入 Claude Agent SDK 的三大改變
+
+<Steps>
+  <Step title="程式碼大瘦身">
+    原本負責調度所有邏輯的 `watcher.ts`，從 360+ 行縮減到 50 行。現在它只做一件事：監聽 Notion 任務，然後叫醒 Agent。所有的思考、決策邏輯，全部移交給了 SDK 和 System Prompt。
+  </Step>
+  <Step title="自主除錯">
+    Agent 寫完程式碼後，能用終端機執行 `npm test`、自己讀錯誤訊息、修正程式碼，直到測試通過為止。
+  </Step>
+  <Step title="靈活擴充">
+    加了 Puppeteer 讓它自動截圖測試畫面，這在舊架構下要寫很多膠水程式碼，現在只需要在 Prompt 裡加一句話。
+  </Step>
+</Steps>
+
+---
+
+## AI 輔助名詞解釋
+
+**Claude Agent SDK**：Anthropic 推出的開發工具包，讓開發者更容易建立能自主思考、執行多步驟任務的 AI 代理人。
+
+**狀態機（State Machine）**：一種程式設計模式，將系統行為定義為一系列「狀態」與「轉換條件」，例如「狀態 A 完成後進入狀態 B」。
+
+**Puppeteer**：Google 開發的網頁自動化工具，常用來自動操控瀏覽器、截圖網頁畫面或進行自動化測試。
+
+**System Prompt**：給 AI 模型的「背景指令」，在對話開始前設定角色、規則與行為準則，讓 AI 知道自己應該如何運作。
+
+---
+
+## 前置作業：連接 Notion 的關鍵四步
+
+要讓 AI Agent 讀寫你的 Notion，你需要一張「通行證」（Integration Token）和一個「地址」（Database ID）。
+
+<Steps>
+  <Step title="建立 Notion Integration（獲取通行證）">
+    前往 [Notion My Integrations](https://www.notion.so/my-integrations) 頁面，點擊「New integration」，選擇 Internal 類型，點擊 Submit 後複製 Internal Integration Secret（以 `secret_` 開頭的字串）。這是你的 `NOTION_API_KEY`，請妥善保存！
+  </Step>
+  <Step title="將 Database 分享給 Integration（最重要的一步！）">
+    打開你的 Notion 任務看板，點擊右上角的「…」→「Connections」→「Add connections」，在搜尋框中輸入你剛剛建立的 Integration 名稱並選擇它。
+  </Step>
+  <Step title="取得 Database ID">
+    打開 Notion Database 頁面，從 URL 中找到 Database ID：`notion.so/[Database-ID]?v=xxx`。
+  </Step>
+  <Step title="設定環境變數">
+    在專案的 `.env` 檔案中填入 `NOTION_API_KEY` 和 `NOTION_DATABASE_ID`，完成串接。
+  </Step>
+</Steps>
+
+<Tip>
+快打開你的 IDE，做自己的工具吧！
+</Tip>

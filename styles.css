@@ -199,8 +199,7 @@ span code {
    Use :has() to precisely target the prev/next nav container
    ============================================================ */
 
-/* Container: any div that directly wraps newsletter nav links */
-div:has(> a[href*="/newsletter/"]),
+/* Container: only target pagination divs using standard rel= attributes */
 div:has(> a[rel="prev"]),
 div:has(> a[rel="next"]) {
   display: flex !important;
@@ -211,7 +210,6 @@ div:has(> a[rel="next"]) {
 }
 
 /* Card style for each prev/next link */
-div:has(> a[href*="/newsletter/"]) > a,
 div:has(> a[rel="prev"]) > a,
 div:has(> a[rel="next"]) > a,
 a[rel="prev"],
@@ -230,7 +228,6 @@ a[rel="next"] {
   transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-div:has(> a[href*="/newsletter/"]) > a:hover,
 a[rel="prev"]:hover,
 a[rel="next"]:hover {
   border-color: var(--color-terracotta) !important;
