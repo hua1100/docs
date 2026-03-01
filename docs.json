@@ -52,6 +52,9 @@
       ]
     }
   },
+  "logo": {
+    "href": "/newsletter/introduction"
+  },
   "navbar": {
     "primary": {
       "type": "button",
