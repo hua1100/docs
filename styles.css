@@ -49,10 +49,15 @@ nav, [data-sidebar] {
    BACKGROUND — Warm Cream Paper
    ============================================================ */
 
-/* Light mode: warm cream */
+/* Light mode: warm cream — comprehensive selectors */
+html,
 html[class*="light"],
 .light,
-body {
+body,
+#__next,
+main,
+[data-page],
+.content-container {
   background-color: var(--color-cream) !important;
 }
 
