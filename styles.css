@@ -22,22 +22,41 @@
    TYPOGRAPHY — Editorial Serif Headings
    ============================================================ */
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6,
+article h1, article h2, article h3,
+article h4, article h5, article h6,
+.prose h1, .prose h2, .prose h3,
+.prose h4, .prose h5, .prose h6 {
   font-family: 'Lora', Georgia, 'Times New Roman', serif !important;
-  letter-spacing: -0.02em;
-  color: var(--color-charcoal);
+  letter-spacing: -0.02em !important;
+  color: var(--color-charcoal) !important;
 }
 
-h1 { font-weight: 600; }
-h2 { font-weight: 500; }
-h3 { font-weight: 500; }
+h1, .prose h1 { font-weight: 600 !important; }
+h2, .prose h2 { font-weight: 500 !important; }
+h3, .prose h3 { font-weight: 500 !important; }
 
 /* Body text */
 body,
 p, li, td, th,
-.prose {
+.prose, .prose p, .prose li {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  color: var(--color-charcoal);
+  color: var(--color-charcoal) !important;
+}
+
+/* Strong / Bold */
+strong, b {
+  color: var(--color-charcoal) !important;
+  font-weight: 600 !important;
+}
+
+/* Ordered & unordered list markers */
+ol, ul {
+  color: var(--color-charcoal) !important;
+}
+ol li::marker,
+ul li::marker {
+  color: var(--color-terracotta) !important;
 }
 
 /* Sidebar navigation text */
