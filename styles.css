@@ -330,19 +330,59 @@ input[placeholder*="Ask"],
   border-color: var(--color-border) !important;
 }
 
-/* Mintlify uses CSS variables — override at root to catch dark-themed components */
-:root {
-  --tw-ring-color: rgba(107, 143, 113, 0.3);
-}
+/* ============================================================
+   MINTLIFY CSS VARIABLE OVERRIDE
+   Force light theme for AI assistant panel + all shadcn/ui components
+   ============================================================ */
 
-/* Dark class overrides used by floating UI */
+/* Override Mintlify / shadcn-ui theme tokens globally,
+   including when applied inside .dark containers            */
+:root,
 .dark,
 [data-theme="dark"],
 [class*="dark-mode"],
 [class*="darkMode"] {
+  --tw-ring-color: rgba(107, 143, 113, 0.3);
+
+  /* shadcn/ui + Mintlify core tokens */
+  --background:            244 244 240   !important; /* #F4F4F0 */
+  --foreground:            58  58  53    !important; /* #3A3A35 */
+  --card:                  250 250 246   !important; /* #FAFAF6 */
+  --card-foreground:       58  58  53    !important;
+  --popover:               250 250 246   !important;
+  --popover-foreground:    58  58  53    !important;
+  --muted:                 236 234 228   !important; /* #ECEAE4 */
+  --muted-foreground:      90  90  82    !important; /* #5A5A52 */
+  --border:                216 213 204   !important; /* #D8D5CC */
+  --input:                 216 213 204   !important;
+  --primary:               107 143 113   !important; /* #6B8F71 sage */
+  --primary-foreground:    255 255 255   !important;
+  --secondary:             236 234 228   !important;
+  --secondary-foreground:  58  58  53    !important;
+  --accent:                236 234 228   !important;
+  --accent-foreground:     58  58  53    !important;
+  --destructive:           196 112 58    !important; /* terracotta */
+  --destructive-foreground: 255 255 255  !important;
+  --ring:                  107 143 113   !important;
+}
+
+/* Fallback: hard-code bg/text on .dark element itself and all descendants */
+.dark,
+[data-theme="dark"] {
   background-color: #FAFAF6 !important;
   color: var(--color-charcoal) !important;
   border-color: var(--color-border) !important;
+}
+
+.dark *,
+[data-theme="dark"] * {
+  color: var(--color-charcoal) !important;
+  border-color: var(--color-border) !important;
+}
+
+.dark *[class*="bg-"],
+[data-theme="dark"] *[class*="bg-"] {
+  background-color: #FAFAF6 !important;
 }
 
 /* ============================================================
