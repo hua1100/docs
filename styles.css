@@ -90,12 +90,44 @@ a:hover {
    CODE
    ============================================================ */
 
-pre, pre code {
+/* Code block container — remove dark background and gradient fade */
+pre,
+pre code,
+[class*="codeBlock"],
+[class*="CodeBlock"],
+[class*="code-block"],
+[data-codeblock],
+[class*="highlight"],
+[class*="Highlight"] {
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
   background-color: #ECEAE4 !important;
   border: 1px solid var(--color-border) !important;
   border-radius: 6px !important;
   color: var(--color-charcoal) !important;
+}
+
+/* Remove the right-side fade gradient Mintlify adds for overflow indication */
+pre::after,
+pre::before,
+[class*="codeBlock"]::after,
+[class*="codeBlock"]::before,
+[class*="CodeBlock"]::after,
+[class*="CodeBlock"]::before,
+[class*="code-block"]::after,
+[class*="code-block"]::before {
+  display: none !important;
+  background: none !important;
+  background-image: none !important;
+  content: none !important;
+}
+
+/* Force all text inside code blocks to be readable */
+pre *,
+pre code *,
+[class*="codeBlock"] *,
+[class*="CodeBlock"] * {
+  color: var(--color-charcoal) !important;
+  background-color: transparent !important;
 }
 
 /* Inline code — terracotta on warm grey */
