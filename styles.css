@@ -4,7 +4,7 @@
    Palette: Sage Green · Terracotta · Warm Cream · Warm Charcoal
    ============================================================ */
 
-/* --- Google Fonts: Editorial Serif + Clean Sans-serif --- */
+/* --- Google Fonts --- */
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;450;500;600&display=swap');
 
 /* --- CSS Variables --- */
@@ -16,18 +16,34 @@
   --color-cream:      #F4F4F0;
   --color-charcoal:   #3A3A35;
   --color-charcoal-2: #5A5A52;
+  --color-border:     #D8D5CC;
 }
 
 /* ============================================================
-   TYPOGRAPHY — Editorial Serif Headings
+   BACKGROUND
+   ============================================================ */
+
+html, html[class*="light"], .light,
+body, #__next, main,
+[data-page], .content-container {
+  background-color: var(--color-cream) !important;
+}
+
+[data-sidebar], aside {
+  background-color: #EEEDE8 !important;
+}
+
+/* ============================================================
+   TYPOGRAPHY
    ============================================================ */
 
 h1, h2, h3, h4, h5, h6,
 article h1, article h2, article h3,
 article h4, article h5, article h6,
 .prose h1, .prose h2, .prose h3,
-.prose h4, .prose h5, .prose h6 {
-  font-family: 'Lora', Georgia, 'Times New Roman', serif !important;
+.prose h4, .prose h5, .prose h6,
+[class*="heading"] {
+  font-family: 'Lora', Georgia, serif !important;
   letter-spacing: -0.02em !important;
   color: var(--color-charcoal) !important;
 }
@@ -36,203 +52,246 @@ h1, .prose h1 { font-weight: 600 !important; }
 h2, .prose h2 { font-weight: 500 !important; }
 h3, .prose h3 { font-weight: 500 !important; }
 
-/* Body text */
-body,
-p, li, td, th,
-.prose, .prose p, .prose li {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+body, p, li, td, th, span, div,
+.prose, .prose p, .prose li,
+[class*="text"], [class*="content"] {
+  font-family: 'Inter', -apple-system, sans-serif !important;
   color: var(--color-charcoal) !important;
 }
 
-/* Strong / Bold */
 strong, b {
   color: var(--color-charcoal) !important;
   font-weight: 600 !important;
 }
 
-/* Ordered & unordered list markers */
-ol, ul {
-  color: var(--color-charcoal) !important;
-}
-ol li::marker,
-ul li::marker {
+/* List markers */
+ol li::marker { color: var(--color-terracotta) !important; }
+ul li::marker { color: var(--color-sage) !important; }
+
+/* ============================================================
+   LINKS
+   ============================================================ */
+
+a,
+a span,
+[class*="link"],
+[class*="anchor"] {
   color: var(--color-terracotta) !important;
-}
-
-/* Sidebar navigation text */
-nav, [data-sidebar] {
-  font-family: 'Inter', sans-serif !important;
-}
-
-/* ============================================================
-   BACKGROUND — Warm Cream Paper
-   ============================================================ */
-
-/* Light mode: warm cream — comprehensive selectors */
-html,
-html[class*="light"],
-.light,
-body,
-#__next,
-main,
-[data-page],
-.content-container {
-  background-color: var(--color-cream) !important;
-}
-
-/* Sidebar background — slightly warmer */
-[data-sidebar],
-aside {
-  background-color: #EEEDE8 !important;
-}
-
-/* ============================================================
-   CALLOUTS — Terracotta & Sage accents
-   ============================================================ */
-
-/* Tip — Sage green */
-.callout-tip,
-[data-callout="tip"] {
-  border-left-color: var(--color-sage) !important;
-  background-color: #EBF2EC !important;
-}
-
-/* Note — Soft gold */
-.callout-note,
-[data-callout="note"] {
-  border-left-color: var(--color-gold) !important;
-  background-color: #F7F2E6 !important;
-}
-
-/* Warning — Terracotta */
-.callout-warning,
-[data-callout="warning"] {
-  border-left-color: var(--color-terracotta) !important;
-  background-color: #FAF0EA !important;
-}
-
-/* Check / Success — Sage */
-.callout-check,
-[data-callout="check"] {
-  border-left-color: var(--color-sage-light) !important;
-  background-color: #EBF2EC !important;
-}
-
-/* Info — Warm charcoal */
-.callout-info,
-[data-callout="info"] {
-  border-left-color: var(--color-charcoal-2) !important;
-  background-color: #F0EFEB !important;
-}
-
-/* Danger — Deep terracotta */
-.callout-danger,
-[data-callout="danger"] {
-  border-left-color: #9E3A1A !important;
-  background-color: #FAE8E4 !important;
-}
-
-/* ============================================================
-   CODE BLOCKS — Warm paper tone
-   ============================================================ */
-
-pre, code {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Menlo', monospace !important;
-  background-color: #ECEAE4 !important;
-  border: 1px solid #DDD9D0 !important;
-  border-radius: 6px !important;
-}
-
-/* Inline code */
-p code, li code {
-  background-color: #ECEAE4 !important;
-  color: var(--color-terracotta) !important;
-  padding: 1px 5px !important;
-  border-radius: 3px !important;
-}
-
-/* ============================================================
-   LINKS — Terracotta accent
-   ============================================================ */
-
-a {
-  color: var(--color-terracotta) !important;
-  text-decoration-color: transparent;
-  transition: text-decoration-color 0.15s ease;
+  text-decoration-color: transparent !important;
+  transition: text-decoration-color 0.15s ease, opacity 0.15s ease;
 }
 
 a:hover {
   text-decoration-color: var(--color-terracotta) !important;
+  opacity: 0.85;
 }
 
 /* ============================================================
-   CARDS — Warm paper with sage border
+   CODE
    ============================================================ */
 
-.card,
-[data-card] {
+pre, pre code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  background-color: #ECEAE4 !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 6px !important;
+  color: var(--color-charcoal) !important;
+}
+
+/* Inline code — terracotta on warm grey */
+code,
+p code, li code, td code,
+span code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  background-color: #ECEAE4 !important;
+  color: var(--color-terracotta) !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+  border: 1px solid #D5D2C8 !important;
+  font-size: 0.88em !important;
+}
+
+/* ============================================================
+   STEPS COMPONENT — override dark Mintlify defaults
+   ============================================================ */
+
+/* Reset any dark containers Mintlify applies to step items */
+[class*="Step"],
+[class*="step"],
+[data-step],
+[data-steps] > *,
+[class*="Steps"] > * {
+  background-color: transparent !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-charcoal) !important;
+}
+
+/* Step number circles — terracotta */
+[class*="StepNumber"],
+[class*="step-number"],
+[class*="stepNumber"],
+[data-step] > *:first-child,
+[class*="Steps"] [class*="Number"] {
+  background-color: var(--color-terracotta) !important;
+  color: #fff !important;
+  border-color: var(--color-terracotta) !important;
+  font-family: 'Lora', serif !important;
+  font-weight: 600 !important;
+}
+
+/* Step connector line — sage */
+[class*="StepLine"],
+[class*="step-line"],
+[class*="connector"] {
+  background-color: var(--color-sage-light) !important;
+  border-color: var(--color-sage-light) !important;
+}
+
+/* Step title */
+[class*="StepTitle"],
+[class*="step-title"],
+[class*="stepTitle"] {
+  color: var(--color-charcoal) !important;
+  font-family: 'Lora', serif !important;
+  font-weight: 600 !important;
+}
+
+/* ============================================================
+   CALLOUTS
+   ============================================================ */
+
+/* Base reset for all callouts */
+[data-callout],
+[class*="callout"],
+[class*="Callout"] {
+  background-color: #F7F6F1 !important;
+  border-left: 3px solid var(--color-sage) !important;
+  color: var(--color-charcoal) !important;
+}
+
+[data-callout="tip"], .callout-tip   { border-left-color: var(--color-sage) !important;       background-color: #EBF2EC !important; }
+[data-callout="note"], .callout-note  { border-left-color: var(--color-gold) !important;       background-color: #F7F2E6 !important; }
+[data-callout="warning"], .callout-warning { border-left-color: var(--color-terracotta) !important; background-color: #FAF0EA !important; }
+[data-callout="check"], .callout-check  { border-left-color: var(--color-sage-light) !important; background-color: #EBF2EC !important; }
+[data-callout="info"], .callout-info   { border-left-color: var(--color-charcoal-2) !important; background-color: #F0EFEB !important; }
+[data-callout="danger"], .callout-danger { border-left-color: #9E3A1A !important;            background-color: #FAE8E4 !important; }
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+
+.card, [data-card],
+[class*="Card"]:not([class*="pagination"]):not([class*="Pagination"]) {
   background-color: #FAFAF6 !important;
-  border: 1px solid #D8D5CC !important;
+  border: 1px solid var(--color-border) !important;
   border-radius: 10px !important;
+  color: var(--color-charcoal) !important;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.card:hover,
-[data-card]:hover {
+.card:hover, [data-card]:hover {
   border-color: var(--color-sage) !important;
   box-shadow: 0 4px 16px rgba(107, 143, 113, 0.12) !important;
 }
 
 /* ============================================================
-   STEPS — Sage numbered circles
+   BOTTOM PAGINATION — card style
    ============================================================ */
 
-[data-step] .step-number,
-.step-number {
-  background-color: var(--color-sage) !important;
-  color: #fff !important;
+[class*="pagination"],
+[class*="Pagination"],
+[class*="prevnext"],
+[class*="PrevNext"],
+[class*="FooterNav"],
+[class*="footer-nav"],
+[class*="ArticleNav"] {
+  display: flex !important;
+  gap: 12px !important;
+  margin-top: 32px !important;
+}
+
+[class*="pagination"] a,
+[class*="Pagination"] a,
+[class*="prevnext"] a,
+[class*="PrevNext"] a,
+[class*="FooterNav"] a,
+[class*="ArticleNav"] a {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  padding: 16px 20px !important;
+  background-color: #FAFAF6 !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 10px !important;
+  color: var(--color-charcoal) !important;
+  text-decoration: none !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  min-height: 72px !important;
+}
+
+[class*="pagination"] a:hover,
+[class*="Pagination"] a:hover,
+[class*="prevnext"] a:hover,
+[class*="PrevNext"] a:hover,
+[class*="FooterNav"] a:hover,
+[class*="ArticleNav"] a:hover {
+  border-color: var(--color-terracotta) !important;
+  box-shadow: 0 4px 16px rgba(196, 112, 58, 0.1) !important;
+  color: var(--color-charcoal) !important;
+  text-decoration: none !important;
+}
+
+/* Prev/Next label above title */
+[class*="pagination"] a span:first-child,
+[class*="PrevNext"] [class*="label"],
+[class*="FooterNav"] [class*="label"] {
+  font-size: 0.75rem !important;
+  color: var(--color-charcoal-2) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  margin-bottom: 4px !important;
+}
+
+/* Article title in card */
+[class*="pagination"] a span:last-child,
+[class*="PrevNext"] [class*="title"],
+[class*="FooterNav"] [class*="title"] {
   font-family: 'Lora', serif !important;
-  font-weight: 600;
+  font-weight: 500 !important;
+  font-size: 0.95rem !important;
+  color: var(--color-charcoal) !important;
+  line-height: 1.4 !important;
 }
 
 /* ============================================================
-   TABLE — Editorial clean style
+   TABLE
    ============================================================ */
 
-table {
-  border-collapse: collapse !important;
-  width: 100%;
-}
+table { border-collapse: collapse !important; width: 100%; }
 
 th {
   background-color: #ECEAE4 !important;
   font-family: 'Lora', serif !important;
   font-weight: 600 !important;
-  letter-spacing: 0.02em;
+  color: var(--color-charcoal) !important;
   border-bottom: 2px solid var(--color-sage) !important;
 }
 
-td {
-  border-bottom: 1px solid #DDD9D0 !important;
-}
-
-tr:hover td {
-  background-color: #F7F6F1 !important;
-}
+td { border-bottom: 1px solid var(--color-border) !important; }
+tr:hover td { background-color: #F7F6F1 !important; }
 
 /* ============================================================
-   NAVBAR — Minimal warm tone
+   NAVBAR
    ============================================================ */
 
-header,
-[data-navbar] {
+header, [data-navbar] {
   background-color: rgba(244, 244, 240, 0.92) !important;
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid #DDD9D0 !important;
+  border-bottom: 1px solid var(--color-border) !important;
 }
 
 /* ============================================================
-   BLOCKQUOTE — Terracotta left border
+   BLOCKQUOTE
    ============================================================ */
 
 blockquote {
