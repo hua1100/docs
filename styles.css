@@ -196,28 +196,52 @@ span code {
 
 /* ============================================================
    BOTTOM PAGINATION — card style
+   Use :has() to precisely target the prev/next nav container
    ============================================================ */
 
-[class*="pagination"],
-[class*="Pagination"],
-[class*="prevnext"],
-[class*="PrevNext"],
-[class*="FooterNav"],
-[class*="footer-nav"],
-[class*="ArticleNav"] {
+/* Container: any div that directly wraps newsletter nav links */
+div:has(> a[href*="/newsletter/"]),
+div:has(> a[rel="prev"]),
+div:has(> a[rel="next"]) {
   display: flex !important;
   gap: 12px !important;
-  margin-top: 32px !important;
+  margin-top: 40px !important;
+  padding-top: 24px !important;
+  border-top: 1px solid var(--color-border) !important;
 }
 
-[class*="pagination"] a,
-[class*="Pagination"] a,
-[class*="prevnext"] a,
-[class*="PrevNext"] a,
-[class*="FooterNav"] a,
-[class*="ArticleNav"] a {
+/* Card style for each prev/next link */
+div:has(> a[href*="/newsletter/"]) > a,
+div:has(> a[rel="prev"]) > a,
+div:has(> a[rel="next"]) > a,
+a[rel="prev"],
+a[rel="next"] {
+  flex: 1 !important;
   display: flex !important;
   flex-direction: column !important;
+  justify-content: center !important;
+  padding: 16px 20px !important;
+  background-color: #FAFAF6 !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 10px !important;
+  color: var(--color-charcoal) !important;
+  text-decoration: none !important;
+  min-height: 80px !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+div:has(> a[href*="/newsletter/"]) > a:hover,
+a[rel="prev"]:hover,
+a[rel="next"]:hover {
+  border-color: var(--color-terracotta) !important;
+  box-shadow: 0 4px 16px rgba(196, 112, 58, 0.10) !important;
+  text-decoration: none !important;
+}
+
+/* Fallback: also target by class name patterns */
+[class*="pagination"] a,
+[class*="Pagination"] a,
+[class*="PrevNext"] a {
   flex: 1 !important;
   padding: 16px 20px !important;
   background-color: #FAFAF6 !important;
@@ -225,42 +249,111 @@ span code {
   border-radius: 10px !important;
   color: var(--color-charcoal) !important;
   text-decoration: none !important;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
-  min-height: 72px !important;
+  min-height: 80px !important;
 }
 
-[class*="pagination"] a:hover,
-[class*="Pagination"] a:hover,
-[class*="prevnext"] a:hover,
-[class*="PrevNext"] a:hover,
-[class*="FooterNav"] a:hover,
-[class*="ArticleNav"] a:hover {
-  border-color: var(--color-terracotta) !important;
-  box-shadow: 0 4px 16px rgba(196, 112, 58, 0.1) !important;
+/* ============================================================
+   SEARCH BAR & COMMAND PALETTE — force light mode
+   ============================================================ */
+
+/* Search trigger button in navbar */
+button[class*="search"],
+button[aria-label*="Search"],
+button[aria-label*="search"],
+[class*="SearchButton"],
+[class*="search-button"],
+[data-search] {
+  background-color: #ECEAE4 !important;
+  border: 1px solid var(--color-border) !important;
   color: var(--color-charcoal) !important;
-  text-decoration: none !important;
 }
 
-/* Prev/Next label above title */
-[class*="pagination"] a span:first-child,
-[class*="PrevNext"] [class*="label"],
-[class*="FooterNav"] [class*="label"] {
-  font-size: 0.75rem !important;
-  color: var(--color-charcoal-2) !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
-  margin-bottom: 4px !important;
-}
-
-/* Article title in card */
-[class*="pagination"] a span:last-child,
-[class*="PrevNext"] [class*="title"],
-[class*="FooterNav"] [class*="title"] {
-  font-family: 'Lora', serif !important;
-  font-weight: 500 !important;
-  font-size: 0.95rem !important;
+/* Command palette dialog (opened when clicking search) */
+[role="dialog"],
+[cmdk-root],
+[data-cmdk-root],
+[class*="CommandMenu"],
+[class*="command-menu"],
+[class*="SearchModal"],
+[class*="SearchDialog"] {
+  background-color: #FAFAF6 !important;
+  border: 1px solid var(--color-border) !important;
   color: var(--color-charcoal) !important;
-  line-height: 1.4 !important;
+}
+
+[cmdk-input],
+[cmdk-input-wrapper],
+[data-cmdk-input],
+input[placeholder*="Search"],
+input[placeholder*="search"] {
+  background-color: #FAFAF6 !important;
+  color: var(--color-charcoal) !important;
+  border-color: var(--color-border) !important;
+}
+
+[cmdk-item],
+[data-cmdk-item] {
+  color: var(--color-charcoal) !important;
+}
+
+[cmdk-item][aria-selected="true"],
+[data-cmdk-item][aria-selected="true"] {
+  background-color: #ECEAE4 !important;
+}
+
+/* ============================================================
+   ASK AI BUTTON & CONTEXTUAL CHAT WIDGET — light mode
+   ============================================================ */
+
+/* Ask AI trigger button */
+button[class*="AskAI"],
+button[class*="ask-ai"],
+[class*="AskAIButton"],
+[aria-label*="Ask AI"],
+[data-ask-ai] {
+  background-color: var(--color-sage) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+/* Contextual chat box at bottom of page */
+[class*="Contextual"],
+[class*="contextual"],
+[class*="ChatWidget"],
+[class*="chat-widget"],
+[class*="ChatBox"],
+[class*="AskAI"],
+[data-contextual] {
+  background-color: #FAFAF6 !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-charcoal) !important;
+  border-radius: 10px !important;
+}
+
+/* Chat textarea and input */
+textarea[placeholder*="question"],
+textarea[placeholder*="Ask"],
+input[placeholder*="Ask"],
+[class*="chat"] textarea,
+[class*="Chat"] textarea {
+  background-color: #FAFAF6 !important;
+  color: var(--color-charcoal) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* Mintlify uses CSS variables — override at root to catch dark-themed components */
+:root {
+  --tw-ring-color: rgba(107, 143, 113, 0.3);
+}
+
+/* Dark class overrides used by floating UI */
+.dark,
+[data-theme="dark"],
+[class*="dark-mode"],
+[class*="darkMode"] {
+  background-color: #FAFAF6 !important;
+  color: var(--color-charcoal) !important;
+  border-color: var(--color-border) !important;
 }
 
 /* ============================================================
