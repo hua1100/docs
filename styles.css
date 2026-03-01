@@ -90,44 +90,59 @@ a:hover {
    CODE
    ============================================================ */
 
-/* Code block container — remove dark background and gradient fade */
+/* ── Code block: background + text ─────────────────────────── */
+
+/* Shiki highlight wrapper (Mintlify v3 uses Shiki) */
+.shiki,
+pre.shiki,
+[class*="shiki"],
 pre,
-pre code,
-[class*="codeBlock"],
-[class*="CodeBlock"],
-[class*="code-block"],
-[data-codeblock],
-[class*="highlight"],
-[class*="Highlight"] {
+pre code {
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  background-color: #ECEAE4 !important;
+  color: var(--color-charcoal) !important;
+  border-radius: 6px !important;
+}
+
+/* Pre blocks that have inline style="background-color:..." from Shiki */
+pre[style],
+pre[style] code {
+  background-color: #ECEAE4 !important;
+  color: var(--color-charcoal) !important;
+}
+
+/* Outer wrapper divs that Mintlify adds around <pre> */
+div:has(> pre),
+div:has(> .shiki) {
   background-color: #ECEAE4 !important;
   border: 1px solid var(--color-border) !important;
   border-radius: 6px !important;
-  color: var(--color-charcoal) !important;
 }
 
-/* Remove the right-side fade gradient Mintlify adds for overflow indication */
-pre::after,
-pre::before,
-[class*="codeBlock"]::after,
-[class*="codeBlock"]::before,
-[class*="CodeBlock"]::after,
-[class*="CodeBlock"]::before,
-[class*="code-block"]::after,
-[class*="code-block"]::before {
-  display: none !important;
-  background: none !important;
+/* ── Remove the gradient fade on the right (copy-button overlay) ─ */
+/* The gradient is an absolutely-positioned <div> sibling of <pre>,  */
+/* NOT a ::after pseudo-element, so target it directly.              */
+
+/* Any div with an inline gradient style (the copy button overlay) */
+[style*="linear-gradient"],
+[style*="gradient"] {
   background-image: none !important;
-  content: none !important;
+  background: transparent !important;
 }
 
-/* Force all text inside code blocks to be readable */
-pre *,
-pre code *,
-[class*="codeBlock"] *,
-[class*="CodeBlock"] * {
+/* Sibling divs immediately after <pre> — the button tray */
+pre + div,
+.shiki + div,
+pre ~ div:last-child {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Force all token spans inside code to readable dark colour */
+pre span,
+.shiki span,
+pre code span {
   color: var(--color-charcoal) !important;
-  background-color: transparent !important;
 }
 
 /* Inline code — terracotta on warm grey */
